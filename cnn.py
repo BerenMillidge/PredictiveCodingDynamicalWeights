@@ -35,10 +35,9 @@ class PCNet(object):
         self.update_dilation_factor = self.n_inference_steps_train
     self.dynamical_weight_update = dynamical_weight_update
     if self.dynamical_weight_update:
-      self.weight_learning_rate = self.weight_learning_rate /self.update_dilation_factor
       for l in self.layers:
         if hasattr(l,"learning_rate"):
-          l.learning_rate = l.learning_rate / self.n_inference_steps_train
+          l.learning_rate = l.learning_rate / self.update_dilation_factor
     if self.numerical_check:
       print("Numerical Check Activated!")
       for l in self.layers:
